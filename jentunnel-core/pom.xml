@@ -1,0 +1,90 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>org.javastack</groupId>
+		<artifactId>jentunnel</artifactId>
+		<version>1.0.1</version>
+		<relativePath>..</relativePath>
+	</parent>
+
+	<artifactId>jentunnel-core</artifactId>
+	<packaging>jar</packaging>
+
+	<properties>
+		<projectRoot>${project.basedir}/..</projectRoot>
+		<slf4j.version>1.7.30</slf4j.version>
+		<packer.version>1.1.2</packer.version>
+		<yaml.version>1.26</yaml.version>
+		<mina.version>2.1.3</mina.version>
+		<sshd.version>2.5.1</sshd.version>
+		<commons-codec.version>1.14</commons-codec.version>
+		<bc.version>1.66</bc.version>
+		<eddsa.version>0.3.0</eddsa.version>
+		<jzlib.version>1.1.3</jzlib.version>
+	</properties>
+
+	<dependencies>
+		<!-- Logging -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${slf4j.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-simple</artifactId>
+			<version>${slf4j.version}</version>
+		</dependency>
+		<!-- Packer -->
+		<dependency>
+			<groupId>org.javastack</groupId>
+			<artifactId>packer</artifactId>
+			<version>${packer.version}</version>
+		</dependency>
+		<!-- YAML -->
+		<dependency>
+			<groupId>org.yaml</groupId>
+			<artifactId>snakeyaml</artifactId>
+			<version>${yaml.version}</version>
+		</dependency>
+		<!-- SSH -->
+		<dependency>
+			<groupId>org.apache.mina</groupId>
+			<artifactId>mina-core</artifactId>
+			<version>${mina.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.sshd</groupId>
+			<artifactId>sshd-core</artifactId>
+			<version>${sshd.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>${commons-codec.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.bouncycastle</groupId>
+			<artifactId>bcprov-jdk15on</artifactId>
+			<version>${bc.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.bouncycastle</groupId>
+			<artifactId>bcpkix-jdk15on</artifactId>
+			<version>${bc.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>net.i2p.crypto</groupId>
+			<artifactId>eddsa</artifactId>
+			<version>${eddsa.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.jcraft</groupId>
+			<artifactId>jzlib</artifactId>
+			<version>${jzlib.version}</version>
+		</dependency>
+	</dependencies>
+</project>

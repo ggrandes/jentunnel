@@ -1,0 +1,154 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>org.javastack</groupId>
+		<artifactId>jentunnel</artifactId>
+		<version>1.0.1</version>
+		<relativePath>..</relativePath>
+	</parent>
+
+	<artifactId>jentunnel-gui</artifactId>
+	<packaging>jar</packaging>
+	<url>${parent.url}</url>
+
+	<properties>
+		<projectRoot>${project.basedir}/..</projectRoot>
+		<start-class>org.javastack.jentunnel.gui.jEnTunnel</start-class>
+		<flatlaf.version>0.40</flatlaf.version>
+		<miglayout.version>5.2</miglayout.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.javastack</groupId>
+			<artifactId>jentunnel-core</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<!-- Swing UI -->
+		<dependency>
+			<groupId>com.formdev</groupId>
+			<artifactId>flatlaf</artifactId>
+			<version>${flatlaf.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.formdev</groupId>
+			<artifactId>flatlaf-extras</artifactId>
+			<version>${flatlaf.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.formdev</groupId>
+			<artifactId>flatlaf-intellij-themes</artifactId>
+			<version>${flatlaf.version}</version>
+		</dependency>
+		<!-- Swing Layouts -->
+		<dependency>
+			<groupId>com.miglayout</groupId>
+			<artifactId>miglayout-swing</artifactId>
+			<version>${miglayout.version}</version>
+		</dependency>
+		<!-- Swing Forms -->
+		<dependency>
+			<groupId>com.jgoodies</groupId>
+			<artifactId>jgoodies-forms</artifactId>
+			<version>1.9.0</version>
+			<optional>true</optional>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>false</filtering>
+			</resource>
+			<resource>
+				<directory>src/main/resources-filtered</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+		<plugins>
+			<!-- Jars in Jar -->
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>2.3.3.RELEASE</version>
+				<executions>
+					<execution>
+						<id>repackage</id>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<!-- https://docs.spring.io/spring-boot/docs/current/maven-plugin/reference/html/ -->
+					<!-- https://docs.spring.io/spring-boot/docs/current/reference/html/appendix-executable-jar-format.html -->
+					<mainClass>${start-class}</mainClass>
+				</configuration>
+			</plugin>
+			<!-- LAUNCH4J -->
+			<plugin>
+				<groupId>com.akathist.maven.plugins.launch4j</groupId>
+				<artifactId>launch4j-maven-plugin</artifactId>
+				<version>1.7.25</version>
+				<executions>
+					<execution>
+						<id>l4j-clui</id>
+						<phase>package</phase>
+						<goals>
+							<goal>launch4j</goal>
+						</goals>
+						<configuration>
+							<!-- http://launch4j.sourceforge.net/docs.html -->
+							<headerType>gui</headerType>
+							<jar>${project.artifactId}-${project.version}.jar</jar>
+							<dontWrapJar>true</dontWrapJar>
+							<outfile>target/${project.artifactId}-launcher-${project.version}.exe</outfile>
+							<downloadUrl>https://jdk.java.net/java-se-ri/14</downloadUrl>
+							<!-- https://convertio.co/ -->
+							<!-- https://msdn.microsoft.com/en-us/library/dn742485 -->
+							<icon>${basedir}/src/main/resources/images/ring.ico</icon>
+							<jre>
+								<minVersion>1.8.0</minVersion>
+								<initialHeapSize>16</initialHeapSize>
+								<maxHeapSize>256</maxHeapSize>
+								<opts>-XX:MinHeapFreeRatio=10 -XX:MaxHeapFreeRatio=20</opts>
+							</jre>
+							<versionInfo>
+								<fileVersion>${project.version}.0</fileVersion>
+								<txtFileVersion>${project.version}</txtFileVersion>
+								<fileDescription>${project.artifactId}</fileDescription>
+								<copyright>${project.groupId}</copyright>
+								<productVersion>${project.version}.0</productVersion>
+								<txtProductVersion>${project.version}</txtProductVersion>
+								<productName>${project.artifactId}</productName>
+								<internalName>${project.artifactId}</internalName>
+								<originalFilename>${project.artifactId}-launcher-${project.version}.exe</originalFilename>
+							</versionInfo>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<!-- Maven Central Deployment -->
+			<plugin>
+				<groupId>org.sonatype.plugins</groupId>
+				<artifactId>nexus-staging-maven-plugin</artifactId>
+				<version>1.6.8</version>
+				<extensions>true</extensions>
+				<configuration>
+					<skipNexusStagingDeployMojo>true</skipNexusStagingDeployMojo>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	<distributionManagement>
+		<repository>
+			<id>ossrh</id>
+			<name>Dummy to avoid accidental deploys</name>
+			<url />
+		</repository>
+	</distributionManagement>
+</project>
