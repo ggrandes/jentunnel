@@ -22,13 +22,13 @@ Manage SSH Tunnels made easy. Open Source Java project under Apache License v2.0
 
 ![Main Window](https://raw.github.com/ggrandes/jentunnel/master/jentunnel-gui/doc/main-window-screenshot.png "Main Window")
 
-###### System Tray 
-
-![System Tray](https://raw.github.com/ggrandes/jentunnel/master/jentunnel-gui/doc/system-tray-screenshot.png "System Tray")
-
 ###### Most of the controls have "hints" 
 
 ![Hints](https://raw.github.com/ggrandes/jentunnel/master/jentunnel-gui/doc/hints-screenshot.png "Hints")
+
+###### System Tray 
+
+![System Tray](https://raw.github.com/ggrandes/jentunnel/master/jentunnel-gui/doc/system-tray-screenshot.png "System Tray")
 
 ---
 
