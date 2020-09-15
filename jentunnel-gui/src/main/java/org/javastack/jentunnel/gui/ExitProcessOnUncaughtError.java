@@ -11,27 +11,32 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-public class ExitProcessOnUncaughtException implements UncaughtExceptionHandler {
+public class ExitProcessOnUncaughtError implements UncaughtExceptionHandler {
 	public static void register() {
-		Thread.setDefaultUncaughtExceptionHandler(new ExitProcessOnUncaughtException());
+		Thread.setDefaultUncaughtExceptionHandler(new ExitProcessOnUncaughtError());
 	}
 
-	private ExitProcessOnUncaughtException() {
+	private ExitProcessOnUncaughtError() {
 	}
 
 	@Override
 	public void uncaughtException(Thread t, Throwable e) {
+		final boolean isError = (e instanceof Error);
 		try {
 			StringWriter writer = new StringWriter();
 			e.printStackTrace(new PrintWriter(writer));
 			System.out.println("Uncaught exception caught" + " in thread: " + t);
 			System.out.flush();
 			System.out.println();
-			System.err.println(writer.getBuffer().toString());
-			System.err.flush();
-			printFullCoreDump();
+			System.out.println(writer.getBuffer().toString());
+			System.out.flush();
+			if (isError) {
+				printFullCoreDump();
+			}
 		} finally {
-			Runtime.getRuntime().halt(1);
+			if (isError) {
+				Runtime.getRuntime().halt(1);
+			}
 		}
 	}
 

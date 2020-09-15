@@ -43,7 +43,7 @@ public class jEnTunnel {
 			System.out.println("SystemTray is not supported");
 		}
 		// Ordered shutdown on Uncaught Exceptions
-		ExitProcessOnUncaughtException.register();
+		ExitProcessOnUncaughtError.register();
 		// Enable window decorations
 		JFrame.setDefaultLookAndFeelDecorated(true);
 		JDialog.setDefaultLookAndFeelDecorated(true);
