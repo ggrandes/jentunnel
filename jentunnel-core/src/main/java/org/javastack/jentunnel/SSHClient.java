@@ -29,6 +29,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.GeneralSecurityException;
 import java.security.PublicKey;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -48,7 +49,6 @@ import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import org.apache.sshd.client.ClientFactoryManager;
 import org.apache.sshd.client.SshClient;
 import org.apache.sshd.client.channel.ClientChannel;
 import org.apache.sshd.client.channel.ClientChannelEvent;
@@ -64,14 +64,14 @@ import org.apache.sshd.common.config.keys.FilePasswordProvider;
 import org.apache.sshd.common.config.keys.KeyUtils;
 import org.apache.sshd.common.config.keys.writer.openssh.OpenSSHKeyPairResourceWriter;
 import org.apache.sshd.common.digest.BuiltinDigests;
+import org.apache.sshd.common.forward.DefaultForwarderFactory;
 import org.apache.sshd.common.session.SessionListener;
-import org.apache.sshd.common.util.io.NoCloseInputStream;
-import org.apache.sshd.common.util.io.NoCloseOutputStream;
+import org.apache.sshd.common.util.io.input.NoCloseInputStream;
+import org.apache.sshd.common.util.io.output.NoCloseOutputStream;
 import org.apache.sshd.common.util.net.SshdSocketAddress;
 import org.apache.sshd.common.util.security.SecurityUtils;
+import org.apache.sshd.core.CoreModuleProperties;
 import org.apache.sshd.server.forward.AcceptAllForwardingFilter;
-import org.javastack.jentunnel.workaround_bug_sshd1033.CustomForwarderFactory;
-import org.javastack.jentunnel.workaround_bug_sshd1063.CustomKnownHostsServerKeyVerifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -552,8 +552,7 @@ public class SSHClient {
 				if (!knownHost.exists()) {
 					knownHost.createNewFile();
 				}
-				// FIXME Workaround Bug SSHD-1063
-				KnownHostsServerKeyVerifier hostVerifier = new CustomKnownHostsServerKeyVerifier(
+				KnownHostsServerKeyVerifier hostVerifier = new KnownHostsServerKeyVerifier(
 						((clientSession, remoteAddress, serverKey) -> {
 							log.warn("Unknown server {} publickey [{}][{}] ({} [{}])", //
 									remoteAddress, //
@@ -583,8 +582,7 @@ public class SSHClient {
 											remoteAddress, entry, expected, actual);
 						});
 				client.setServerKeyVerifier(hostVerifier);
-				// FIXME Workaround Bug SSHD-1033
-				client.setForwarderFactory(new CustomForwarderFactory());
+				client.setForwarderFactory(new DefaultForwarderFactory());
 				// https://github.com/apache/mina-sshd/blob/master/docs/client-setup.md
 				// TODO: Nuevo PublicKey Auth?
 				// client.setClientIdentityLoader(ClientIdentityLoader.DEFAULT);
@@ -601,12 +599,9 @@ public class SSHClient {
 						notify.notifyConnecting(self);
 					}
 				}
-				PropertyResolverUtils.updateProperty(client, ClientFactoryManager.HEARTBEAT_INTERVAL,
-						TimeUnit.SECONDS.toMillis(10L)); // DISABLE
-				PropertyResolverUtils.updateProperty(client, ClientFactoryManager.HEARTBEAT_REPLY_WAIT,
-						TimeUnit.SECONDS.toMillis(15L)); // DISABLE
-				PropertyResolverUtils.updateProperty(client,
-						ClientFactoryManager.DEFAULT_KEEP_ALIVE_HEARTBEAT_STRING, "keepalive@openssh.com");
+				CoreModuleProperties.HEARTBEAT_INTERVAL.set(client, Duration.ofSeconds(10));
+				CoreModuleProperties.HEARTBEAT_REPLY_WAIT.set(client, Duration.ofSeconds(15));
+				CoreModuleProperties.HEARTBEAT_REQUEST.set(client, "keepalive@openssh.com");
 
 				// org.apache.sshd.client.session.ClientConnectionService
 				// handleUnknownRequest(ClientConnectionService[ClientSessionImpl[test@/192.168.x.x:22]])

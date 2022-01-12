@@ -2,7 +2,7 @@
 
 Manage SSH Tunnels made easy. Open Source Java project under Apache License v2.0
 
-### Current Stable Version is [1.0.2](https://github.com/ggrandes/jentunnel/releases)
+### Current Stable Version is [1.1.0](https://github.com/ggrandes/jentunnel/releases)
 
 ---
 
