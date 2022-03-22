@@ -6,11 +6,11 @@
 	<groupId>org.javastack</groupId>
 	<artifactId>jentunnel</artifactId>
 	<packaging>pom</packaging>
-	<version>1.1.0</version>
-	<description>Badges for Maven Central</description>
+	<version>1.1.1</version>
+	<description>Manage SSH Tunnels made easy</description>
 
 	<name>${project.groupId}:${project.artifactId}</name>
-	<url>https://github.com/ggrandes/${project.artifactId}</url>
+	<url>https://github.com/ggrandes/jentunnel</url>
 	<licenses>
 		<license>
 			<name>The Apache License, Version 2.0</name>
@@ -25,9 +25,9 @@
 		</developer>
 	</developers>
 	<scm>
-		<connection>scm:git:git@github.com:ggrandes/${project.artifactId}.git</connection>
-		<developerConnection>scm:git:git@github.com:ggrandes/${project.artifactId}.git</developerConnection>
-		<url>git@github.com:ggrandes/${project.artifactId}.git</url>
+		<connection>scm:git:git@github.com:ggrandes/jentunnel.git</connection>
+		<developerConnection>scm:git:git@github.com:ggrandes/jentunnel.git</developerConnection>
+		<url>git@github.com:ggrandes/jentunnel.git</url>
 	</scm>
 
 	<modules>
