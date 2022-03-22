@@ -2,13 +2,13 @@
 
 Manage SSH Tunnels made easy. Open Source Java project under Apache License v2.0
 
-### Current Stable Version is [1.1.0](https://github.com/ggrandes/jentunnel/releases)
+### Current Stable Version is [1.1.1](https://github.com/ggrandes/jentunnel/releases)
 
 ---
 
 ## Requirements, Installation and Running
 
-* Java Runtime (8 o newer): https://jdk.java.net/java-se-ri/14
+* Java Runtime (8 o newer): https://jdk.java.net/java-se-ri/17
 * This software run in [Portable Mode](https://en.wikipedia.org/wiki/Portable_application), you only need to unzip in a folder to install.
 * Run the `jentunnel-gui-launcher.exe` (in Windows) or execute `java -jar jentunnel-gui-x.x.x.jar` (in Linux).
 
