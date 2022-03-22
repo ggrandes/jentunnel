@@ -10,7 +10,7 @@ import java.util.List;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
-import com.formdev.flatlaf.extras.SVGUtils;
+import com.formdev.flatlaf.extras.FlatSVGUtils;
 
 public class Resources {
 	static AppInfo appInfo = AppInfo.getInstance();
@@ -20,7 +20,7 @@ public class Resources {
 	// https://www.materialui.co/flatuicolors
 	// https://fontawesome.com/icons?d=gallery
 	// https://github.com/FortAwesome/Font-Awesome/blob/master/svgs/
-	static List<Image> mainIcons = SVGUtils.createWindowIconImages("/images/ring.svg");
+	static List<Image> mainIcons = FlatSVGUtils.createWindowIconImages("/images/ring.svg");
 	static ImageIcon userIcon = loadIconSVG("/images/user.svg");
 	static ImageIcon chainIcon = loadIconSVG("/images/chain.svg");
 	static ImageIcon forwardIcon = loadIconSVG("/images/random.svg");
@@ -91,7 +91,7 @@ public class Resources {
 	}
 
 	private static ImageIcon loadIconSVG(final String location) {
-		final BufferedImage image = SVGUtils.svg2image(location, 1f); // 16 x 16
+		final BufferedImage image = FlatSVGUtils.svg2image(location, 1f); // 16 x 16
 		if (image == null) {
 			throw resourceNotFound(location);
 		}
@@ -105,7 +105,7 @@ public class Resources {
 	private static AnimatedIcon loadIconSVG(final float size, final String... locations) {
 		final ImageIcon[] imgs = new ImageIcon[locations.length];
 		for (int i = 0; i < locations.length; i++) {
-			final BufferedImage image = SVGUtils.svg2image(locations[i], size);
+			final BufferedImage image = FlatSVGUtils.svg2image(locations[i], size);
 			if (image == null) {
 				throw resourceNotFound(locations[i]);
 			}
@@ -123,7 +123,7 @@ public class Resources {
 	}
 
 	private static Image loadImageSVG(final String location) {
-		final BufferedImage image = SVGUtils.svg2image(location, 1f); // 16 x 16
+		final BufferedImage image = FlatSVGUtils.svg2image(location, 1f); // 16 x 16
 		if (image == null) {
 			throw resourceNotFound(location);
 		}

@@ -102,13 +102,13 @@ public enum GlobalSettings {
 			if (IntelliJTheme.ThemeLaf.class.getName().equals(lafClassName)) {
 				String theme = LAF_THEME.get(); // ""
 				if (theme.startsWith(RESOURCE_PREFIX)) {
-					IntelliJTheme.install(IJThemesPanel.class.getResourceAsStream(
+					IntelliJTheme.setup(IJThemesPanel.class.getResourceAsStream(
 							IJThemesPanel.THEMES_PACKAGE + theme.substring(RESOURCE_PREFIX.length())));
 				} else if (theme.startsWith(FILE_PREFIX)) {
-					FlatLaf.install(IntelliJTheme
+					FlatLaf.setup(IntelliJTheme
 							.createLaf(new FileInputStream(theme.substring(FILE_PREFIX.length()))));
 				} else {
-					FlatDarculaLaf.install();
+					FlatDarculaLaf.setup();
 				}
 				if (!theme.isEmpty()) {
 					UIManager.getLookAndFeelDefaults().put(THEME_UI_KEY.get(), theme);
@@ -118,9 +118,9 @@ public enum GlobalSettings {
 				if (theme.startsWith(FILE_PREFIX)) {
 					File themeFile = new File(theme.substring(FILE_PREFIX.length()));
 					String themeName = StringUtils.removeTrailing(themeFile.getName(), ".properties");
-					FlatLaf.install(new FlatPropertiesLaf(themeName, themeFile));
+					FlatLaf.setup(new FlatPropertiesLaf(themeName, themeFile));
 				} else {
-					FlatDarculaLaf.install();
+					FlatDarculaLaf.setup();
 				}
 				if (!theme.isEmpty()) {
 					UIManager.getLookAndFeelDefaults().put(THEME_UI_KEY.get(), theme);
@@ -131,7 +131,7 @@ public enum GlobalSettings {
 		} catch (Exception e) {
 			log.error("Error loading LAF: {}", String.valueOf(e), e);
 			// fallback
-			FlatDarculaLaf.install();
+			FlatDarculaLaf.setup();
 		}
 		// Show all Mnemonics
 		UIManager.put("Component.hideMnemonics", false);

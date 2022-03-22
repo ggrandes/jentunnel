@@ -17,8 +17,8 @@
 	<properties>
 		<projectRoot>${project.basedir}/..</projectRoot>
 		<start-class>org.javastack.jentunnel.gui.jEnTunnel</start-class>
-		<flatlaf.version>0.40</flatlaf.version>
-		<miglayout.version>5.2</miglayout.version>
+		<flatlaf.version>1.6.5</flatlaf.version>
+		<miglayout.version>5.3</miglayout.version>
 	</properties>
 
 	<dependencies>

@@ -254,9 +254,9 @@ public class IJThemesPanel extends JPanel {
 		} else if (themeInfo.themeFile != null) {
 			try {
 				if (themeInfo.themeFile.getName().endsWith(".properties")) {
-					FlatLaf.install(new FlatPropertiesLaf(themeInfo.name, themeInfo.themeFile));
+					FlatLaf.setup(new FlatPropertiesLaf(themeInfo.name, themeInfo.themeFile));
 				} else {
-					FlatLaf.install(IntelliJTheme.createLaf(new FileInputStream(themeInfo.themeFile)));
+					FlatLaf.setup(IntelliJTheme.createLaf(new FileInputStream(themeInfo.themeFile)));
 				}
 				GlobalSettings.LAF_THEME.set(GlobalSettings.FILE_PREFIX  + themeInfo.themeFile);
 			} catch (Exception ex) {
@@ -264,7 +264,7 @@ public class IJThemesPanel extends JPanel {
 				showInformationDialog("Failed to load '" + themeInfo.themeFile + "'.", ex);
 			}
 		} else {
-			IntelliJTheme.install(getClass().getResourceAsStream(THEMES_PACKAGE + themeInfo.resourceName));
+			IntelliJTheme.setup(getClass().getResourceAsStream(THEMES_PACKAGE + themeInfo.resourceName));
 			GlobalSettings.LAF_THEME.set(GlobalSettings.RESOURCE_PREFIX + themeInfo.resourceName);
 		}
 
