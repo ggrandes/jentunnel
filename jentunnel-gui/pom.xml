@@ -93,7 +93,7 @@
 			<plugin>
 				<groupId>com.akathist.maven.plugins.launch4j</groupId>
 				<artifactId>launch4j-maven-plugin</artifactId>
-				<version>1.7.25</version>
+				<version>2.5.0</version>
 				<executions>
 					<execution>
 						<id>l4j-clui</id>
@@ -115,7 +115,7 @@
 								<minVersion>1.8.0</minVersion>
 								<initialHeapSize>16</initialHeapSize>
 								<maxHeapSize>256</maxHeapSize>
-								<opts>-XX:MinHeapFreeRatio=10 -XX:MaxHeapFreeRatio=20</opts>
+								<opts>-XX:+IgnoreUnrecognizedVMOptions -XX:MinHeapFreeRatio=10 -XX:MaxHeapFreeRatio=20</opts>
 							</jre>
 							<versionInfo>
 								<fileVersion>${project.version}.0</fileVersion>
