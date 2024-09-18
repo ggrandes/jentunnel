@@ -6,7 +6,7 @@
 	<groupId>org.javastack</groupId>
 	<artifactId>jentunnel</artifactId>
 	<packaging>pom</packaging>
-	<version>1.1.4</version>
+	<version>1.1.5</version>
 	<description>Manage SSH Tunnels made easy</description>
 
 	<name>${project.groupId}:${project.artifactId}</name>
