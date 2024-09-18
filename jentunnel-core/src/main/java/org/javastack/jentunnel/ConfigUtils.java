@@ -11,6 +11,7 @@ import java.util.Map.Entry;
 
 import org.yaml.snakeyaml.DumperOptions;
 import org.yaml.snakeyaml.DumperOptions.LineBreak;
+import org.yaml.snakeyaml.LoaderOptions;
 import org.yaml.snakeyaml.TypeDescription;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.Constructor;
@@ -77,7 +78,7 @@ public class ConfigUtils {
 		options.setAllowUnicode(false);
 		options.setIndicatorIndent(2);
 		options.setIndent(4);
-		final Constructor constructor = new Constructor(ConfigData.class);
+		final Constructor constructor = new Constructor(ConfigData.class, new LoaderOptions());
 		final Representer representer = new Representer(options);
 		for (final Entry<Class<?>, String> e : map.entrySet()) {
 			constructor.addTypeDescription(new TypeDescription(e.getKey(), e.getValue()));
