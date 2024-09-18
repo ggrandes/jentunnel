@@ -71,18 +71,18 @@ public class ConfigUtils {
 				put(Forward.Remote.class, "!remote");
 			}
 		};
-		final Constructor constructor = new Constructor(ConfigData.class);
-		final Representer representer = new Representer();
-		for (final Entry<Class<?>, String> e : map.entrySet()) {
-			constructor.addTypeDescription(new TypeDescription(e.getKey(), e.getValue()));
-			representer.addClassTag(e.getKey(), new Tag(e.getValue()));
-		}
 		final DumperOptions options = new DumperOptions();
 		options.setDefaultFlowStyle(DumperOptions.FlowStyle.BLOCK);
 		options.setLineBreak(LineBreak.WIN);
 		options.setAllowUnicode(false);
 		options.setIndicatorIndent(2);
 		options.setIndent(4);
+		final Constructor constructor = new Constructor(ConfigData.class);
+		final Representer representer = new Representer(options);
+		for (final Entry<Class<?>, String> e : map.entrySet()) {
+			constructor.addTypeDescription(new TypeDescription(e.getKey(), e.getValue()));
+			representer.addClassTag(e.getKey(), new Tag(e.getValue()));
+		}
 		return new Yaml(constructor, representer, options);
 	}
 
